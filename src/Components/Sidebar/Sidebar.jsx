@@ -1,37 +1,46 @@
-import React, { useEffect, useState } from "react";
-import { getNotes } from "../../services/API";
+import React from "react";
+import { ListItem } from "../ListItem/ListItem";
 
-export const Sidebar = () => {
-  const [notes, setNotes] = useState([]);
-  useEffect(() => {
-    const fetchNotes = async () => {
-      try {
-        const notesList = await getNotes();
-        const { records } = notesList;
-        setNotes(records);
-      } catch (error) {
-        console.log(error.message);
-      }
+export const Sidebar = ({
+  list,
+  handleAddNote,
+  handleDeleteNote,
+  handleEditNote,
+}) => {
+  const onClickAddNote = () => {
+    const note = {
+      id: 1,
+      title: "Art",
     };
-    fetchNotes();
-  }, []);
+    handleAddNote(note);
+  };
+
+  const onClickDeleteNote = () => {
+    handleDeleteNote("1");
+  };
+
+  const onClickEditNote = () => {
+    const note = {
+      id: 1,
+      title: "Art",
+      text: "Arnold",
+      data: "23-05-2023 4:13:00",
+    };
+    handleEditNote(note);
+  };
 
   return (
     <div>
-      <ul>
-        {notes.map((el) => {
-          const title = el.values.bIW6hdUSjpf4oia07dRMHy;
-          const text = el.values.ddNmkgq8jhzioSlCkmsSod;
-          const date = el.values.cVWQ5XAeDfW6pdPM4EqbTo;
-          return (
-            <li key={el.id}>
-              <p>{title}</p>
-              <p>{date}</p>
-              <p>{text}</p>
-            </li>
-          );
-        })}
-      </ul>
+      <button type="button" onClick={onClickAddNote}>
+        Add
+      </button>
+      <button type="button" onClick={onClickDeleteNote}>
+        Delete
+      </button>
+      <button type="button" onClick={onClickEditNote}>
+        Edit
+      </button>
+      <ListItem notes={list} />
     </div>
   );
 };
