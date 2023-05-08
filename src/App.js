@@ -2,11 +2,18 @@ import { useEffect, useState } from "react";
 import { SearchBox } from "./Components/SearchBox/SearchBox";
 import { Sidebar } from "./Components/Sidebar/Sidebar";
 import { Workspace } from "./Components/Workspace/Workspace";
-import { addNote, deleteNote, editNote, getNotes, getOneNote } from "./services/API";
+import {
+  addNote,
+  deleteNote,
+  editNote,
+  getNotes,
+  getOneNote,
+} from "./services/API";
 
 function App() {
   const [notes, setNotes] = useState([]);
   const [note, setNote] = useState(null);
+  const [noteId, setNoteId] = useState(null);
 
   useEffect(() => {
     const fetchNotes = async () => {
@@ -21,10 +28,18 @@ function App() {
     fetchNotes();
   }, []);
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   if (!noteId) {
+  //     return;
+  //   }
+  //   handleShowNote(noteId)
+  // }, [noteId]);
+
+  const handleShowNote = (id) => {
+    setNoteId(id);
     const fetchNote = async () => {
       try {
-        const noteInfo = await getOneNote("ddLeNcTKbcIlJdUt0wyCou");
+        const noteInfo = await getOneNote(id);
         const { record } = noteInfo;
         setNote(record.values);
       } catch (error) {
@@ -32,7 +47,7 @@ function App() {
       }
     };
     fetchNote();
-  }, []);
+  }
 
   const handleAddNote = (note) => {
     const fetchNewNote = async () => {
@@ -75,8 +90,9 @@ function App() {
         handleAddNote={handleAddNote}
         handleDeleteNote={handleDeleteNote}
         handleEditNote={handleEditNote}
+        handleShowNote={handleShowNote}
       />
-      <Workspace noteInfo={note}/>
+      <Workspace noteInfo={note} />
     </div>
   );
 }

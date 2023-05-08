@@ -6,6 +6,7 @@ export const Sidebar = ({
   handleAddNote,
   handleDeleteNote,
   handleEditNote,
+  handleShowNote
 }) => {
   const onClickAddNote = () => {
     const note = {
@@ -40,7 +41,7 @@ export const Sidebar = ({
       <button type="button" onClick={onClickEditNote}>
         Edit
       </button>
-      <ListItem notes={list} />
+      <ListItem notes={list} handleShowNote={handleShowNote}/>
     </div>
   );
 };

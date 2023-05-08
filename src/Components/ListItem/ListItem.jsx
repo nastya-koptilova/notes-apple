@@ -1,6 +1,10 @@
 import React from "react";
 
-export const ListItem = ({ notes }) => {
+export const ListItem = ({ notes, handleShowNote }) => {
+  const onClickShowNote = (event) => {
+   const noteId = event.currentTarget.getAttribute('data-id');
+   handleShowNote(noteId);
+  }
   return (
     <ul>
       {notes.map((el) => {
@@ -8,7 +12,7 @@ export const ListItem = ({ notes }) => {
         const text = el.values.ddNmkgq8jhzioSlCkmsSod;
         const date = el.values.cVWQ5XAeDfW6pdPM4EqbTo;
         return (
-          <li key={el.id}>
+          <li key={el.id} onClick={onClickShowNote} data-id={el.id}>
             <p>{title}</p>
             <p>{date}</p>
             <p>{text}</p>
