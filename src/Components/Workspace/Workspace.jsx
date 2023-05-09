@@ -1,19 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { NotesContext } from "../../context/NotesContext";
 
-export const Workspace = ({ noteInfo }) => {
+export const Workspace = () => {
+  const { note } = useContext(NotesContext);
+
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   const [text, setText] = useState("");
-  const [noteId, setNoteId] = useState('');
+  const [noteId, setNoteId] = useState("");
 
   useEffect(() => {
-    if (noteInfo) {
-      setTitle(noteInfo.values.bIW6hdUSjpf4oia07dRMHy);
-      setDate(noteInfo.values.cVWQ5XAeDfW6pdPM4EqbTo);
-      setText(noteInfo.values.ddNmkgq8jhzioSlCkmsSod);
-      setNoteId(noteInfo.id);
+    if (note) {
+      setTitle(note.values.bIW6hdUSjpf4oia07dRMHy);
+      setDate(note.values.cVWQ5XAeDfW6pdPM4EqbTo);
+      setText(note.values.ddNmkgq8jhzioSlCkmsSod);
+      setNoteId(note.id);
     }
-  }, [noteInfo]);
+  }, [note]);
 
   return (
     <div>

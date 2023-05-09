@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { ListItem } from "../ListItem/ListItem";
+import { NotesContext } from "../../context/NotesContext";
 
-export const Sidebar = ({
-  list,
-  handleAddNote,
-  handleDeleteNote,
-  handleEditNote,
-  handleShowNote,
-  handleShowList
-}) => {
+export const Sidebar = () => {
+
+  const {
+    handleAddNote,
+    handleDeleteNote,
+    handleEditNote,
+    handleShowList,
+  } = useContext(NotesContext);
+
   const onClickAddNote = () => {
     const note = {
       id: 1,
@@ -44,7 +46,7 @@ export const Sidebar = ({
       <button type="button" onClick={onClickEditNote}>
         Edit
       </button>
-      <ListItem notes={list} handleShowNote={handleShowNote}/>
+      <ListItem/>
     </div>
   );
 };

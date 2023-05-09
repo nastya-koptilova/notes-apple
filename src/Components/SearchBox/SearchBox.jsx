@@ -1,13 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
+import { NotesContext } from "../../context/NotesContext";
 
-export const SearchBox = ({ handleSearchNote }) => {
-    const [query, setQuery] = useState('');
-  
-    const handleSearch = ({ target }) => {
+export const SearchBox = () => {
+  const { handleSearchNote } = useContext(NotesContext);
+
+  const handleSearch = ({ target }) => {
     handleSearchNote(target.value);
-    //   setQuery(target.value);
-    //   handleSearch(query);
-    };
+  };
 
   return (
     <div>

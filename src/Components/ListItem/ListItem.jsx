@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
+import { NotesContext } from "../../context/NotesContext";
 
-export const ListItem = ({ notes, handleShowNote }) => {
+export const ListItem = () => {
+  const { filterNotes, handleShowNote } = useContext(NotesContext);
   const onClickShowNote = (event) => {
-   const noteId = event.currentTarget.getAttribute('data-id');
-   handleShowNote(noteId);
-  }
+    const noteId = event.currentTarget.getAttribute("data-id");
+    handleShowNote(noteId);
+  };
   return (
     <ul>
-      {notes.map((el) => {
+      {filterNotes.map((el) => {
         const title = el.values.bIW6hdUSjpf4oia07dRMHy;
         const text = el.values.ddNmkgq8jhzioSlCkmsSod;
         const date = el.values.cVWQ5XAeDfW6pdPM4EqbTo;
