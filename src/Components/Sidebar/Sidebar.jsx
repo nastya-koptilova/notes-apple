@@ -6,7 +6,8 @@ export const Sidebar = ({
   handleAddNote,
   handleDeleteNote,
   handleEditNote,
-  handleShowNote
+  handleShowNote,
+  handleShowList
 }) => {
   const onClickAddNote = () => {
     const note = {
@@ -14,6 +15,7 @@ export const Sidebar = ({
       title: "Art",
     };
     handleAddNote(note);
+    handleShowList();
   };
 
   const onClickDeleteNote = () => {
@@ -28,6 +30,7 @@ export const Sidebar = ({
       data: "23-05-2023 4:13:00",
     };
     handleEditNote(note);
+    // handleShowList();
   };
 
   return (

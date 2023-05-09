@@ -4,12 +4,14 @@ export const Workspace = ({ noteInfo }) => {
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   const [text, setText] = useState("");
+  const [noteId, setNoteId] = useState('');
 
   useEffect(() => {
     if (noteInfo) {
-      setTitle(noteInfo.bIW6hdUSjpf4oia07dRMHy);
-      setDate(noteInfo.cVWQ5XAeDfW6pdPM4EqbTo);
-      setText(noteInfo.ddNmkgq8jhzioSlCkmsSod);
+      setTitle(noteInfo.values.bIW6hdUSjpf4oia07dRMHy);
+      setDate(noteInfo.values.cVWQ5XAeDfW6pdPM4EqbTo);
+      setText(noteInfo.values.ddNmkgq8jhzioSlCkmsSod);
+      setNoteId(noteInfo.id);
     }
   }, [noteInfo]);
 

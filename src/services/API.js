@@ -46,22 +46,31 @@ export async function addNote(note) {
 
 export async function deleteNote(id) {
   const { data } = await axios.delete(
-    `${BASE_URL}apps/${APP_ID}/dtypes/${id}.json?rest_api_key=${KEY}`,
+    `${BASE_URL}apps/${APP_ID}/dtypes/${id}.json?rest_api_key=${KEY}`
   );
   return data;
 }
 
 export async function editNote(newData) {
-    const { data } = await axios.put(
-      `${BASE_URL}apps/${APP_ID}/dtypes/${newData.id}.json`,
-      {
-        rest_api_key: KEY,
-        values: {
-          bIW6hdUSjpf4oia07dRMHy: newData.title,
-          cVWQ5XAeDfW6pdPM4EqbTo: newData.data,
-          ddNmkgq8jhzioSlCkmsSod: newData.text,
-        },
-      }
-    );
-    return data;
-  }
+  const { data } = await axios.put(
+    `${BASE_URL}apps/${APP_ID}/dtypes/${newData.id}.json`,
+    {
+      rest_api_key: KEY,
+      values: {
+        bIW6hdUSjpf4oia07dRMHy: newData.title,
+        cVWQ5XAeDfW6pdPM4EqbTo: newData.data,
+        ddNmkgq8jhzioSlCkmsSod: newData.text,
+      },
+    }
+  );
+  return data;
+}
+
+// export async function searchNotes(query) {
+//   const { data } = await axios.post(`${BASE_URL}search/${APP_ID}.json`, {
+//     rest_api_key: KEY,
+//     entity_id: ENTITY_ID,
+//     search: [[{ a: "ALL", b: query, o: "is" }]],
+//   });
+//   return data;
+// }

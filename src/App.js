@@ -8,14 +8,20 @@ import {
   editNote,
   getNotes,
   getOneNote,
+  searchNotes,
 } from "./services/API";
 
 function App() {
   const [notes, setNotes] = useState([]);
   const [note, setNote] = useState(null);
   const [noteId, setNoteId] = useState(null);
+  const [searchValue, setSearchValue] = useState("");
 
   useEffect(() => {
+    handleShowList();
+  }, []);
+
+  const handleShowList = () => {
     const fetchNotes = async () => {
       try {
         const notesList = await getNotes();
@@ -26,14 +32,7 @@ function App() {
       }
     };
     fetchNotes();
-  }, []);
-
-  // useEffect(() => {
-  //   if (!noteId) {
-  //     return;
-  //   }
-  //   handleShowNote(noteId)
-  // }, [noteId]);
+  };
 
   const handleShowNote = (id) => {
     setNoteId(id);
@@ -41,13 +40,13 @@ function App() {
       try {
         const noteInfo = await getOneNote(id);
         const { record } = noteInfo;
-        setNote(record.values);
+        setNote(record);
       } catch (error) {
         console.log(error.message);
       }
     };
     fetchNote();
-  }
+  };
 
   const handleAddNote = (note) => {
     const fetchNewNote = async () => {
@@ -69,6 +68,7 @@ function App() {
       }
     };
     fetchDeleteNote();
+    handleShowList();
   };
 
   const handleEditNote = (note) => {
@@ -82,15 +82,26 @@ function App() {
     fetchEditNote();
   };
 
+  const handleSearchNote = (query) => {
+    setSearchValue(query);
+  };
+
+  const filterNotes = notes.filter((el) =>
+    el.values.bIW6hdUSjpf4oia07dRMHy
+      .toLowerCase()
+      .includes(searchValue.toLowerCase().trim())
+  );
+
   return (
     <div>
-      <SearchBox />
+      <SearchBox handleSearchNote={handleSearchNote} />
       <Sidebar
-        list={notes}
+        list={filterNotes}
         handleAddNote={handleAddNote}
         handleDeleteNote={handleDeleteNote}
         handleEditNote={handleEditNote}
         handleShowNote={handleShowNote}
+        handleShowList={handleShowList}
       />
       <Workspace noteInfo={note} />
     </div>
