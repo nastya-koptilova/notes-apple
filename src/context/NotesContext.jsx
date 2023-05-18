@@ -1,13 +1,13 @@
 import React, { createContext, useState } from "react";
-import {
-  addNote,
-  deleteNote,
-  editNote,
-  getNotes,
-  getOneNote,
-} from "../services/API";
+import Dexie from "dexie";
+import { useLiveQuery } from "dexie-react-hooks";
 
 export const NotesContext = createContext();
+
+const db = new Dexie("notesDB");
+db.version(1).stores({ notesDB: "++id,date,text" });
+
+const { notesDB } = db;
 
 export const NotesContextProvider = ({ children }) => {
   const [notes, setNotes] = useState([]);
@@ -15,90 +15,51 @@ export const NotesContextProvider = ({ children }) => {
   const [noteId, setNoteId] = useState(null);
   const [searchValue, setSearchValue] = useState("");
 
+  const allItems = useLiveQuery(() => notesDB.toArray(), []);
+
+  console.log(allItems);
+
   const handleShowList = () => {
-    const fetchNotes = async () => {
-      try {
-        const notesList = await getNotes();
-        const { records } = notesList;
-        setNotes(records);
-      } catch (error) {
-        console.log(error.message);
-      }
-    };
-    fetchNotes();
+    setNotes(allItems);
   };
 
-  const handleShowNote = (id) => {
-    setNoteId(id);
-    const fetchNote = async () => {
-      try {
-        const noteInfo = await getOneNote(id);
-        const { record } = noteInfo;
-        setNote(record);
-      } catch (error) {
-        console.log(error.message);
-      }
-    };
-    fetchNote();
+  // const handleShowNote = (id) => {
+  //   setNoteId(id);
+  //   const fetchNote = async () => {
+  //     try {
+  //       const noteInfo = await getOneNote(id);
+  //       const { record } = noteInfo;
+  //       setNote(record);
+  //     } catch (error) {
+  //       console.log(error.message);
+  //     }
+  //   };
+  //   fetchNote();
+  // };
+
+  const handleAddNote = async (note) => {
+    await notesDB.add(note);
   };
 
-  const handleAddNote = (note) => {
-    const fetchNewNote = async () => {
-      try {
-        const newNote = await addNote(note);
-      } catch (error) {
-        console.log(error.message);
-      }
-    };
-    fetchNewNote();
+  const handleDeleteNote = async (id) => {
+    await notesDB.delete(id);
   };
 
-  const handleDeleteNote = (id) => {
-    const fetchDeleteNote = async () => {
-      try {
-        const deleteOneNote = await deleteNote(id);
-      } catch (error) {
-        console.log(error.message);
-      }
-    };
-    fetchDeleteNote();
-    handleShowList();
+  const handleEditNote = async (id, note) => {
+    await notesDB.update(id, note);
   };
-
-  const handleEditNote = (note) => {
-    const fetchEditNote = async () => {
-      try {
-        const updateNote = await editNote(note);
-      } catch (error) {
-        console.log(error.message);
-      }
-    };
-    fetchEditNote();
-  };
-
-  const handleSearchNote = (query) => {
-    setSearchValue(query);
-  };
-
-  const filterNotes = notes.filter((el) =>
-  el.values.bIW6hdUSjpf4oia07dRMHy
-    .toLowerCase()
-    .includes(searchValue.toLowerCase().trim())
-);
 
   return (
     <NotesContext.Provider
       value={{
-        filterNotes,
+        notes,
         note,
         noteId,
         searchValue,
         handleAddNote,
         handleDeleteNote,
         handleEditNote,
-        handleShowNote,
         handleShowList,
-        handleSearchNote
       }}
     >
       {children}

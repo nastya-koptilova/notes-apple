@@ -3,36 +3,27 @@ import { ListItem } from "../ListItem/ListItem";
 import { NotesContext } from "../../context/NotesContext";
 
 export const Sidebar = () => {
-
-  const {
-    handleAddNote,
-    handleDeleteNote,
-    handleEditNote,
-    handleShowList,
-  } = useContext(NotesContext);
+  const { handleAddNote, handleDeleteNote, handleEditNote, handleShowList } =
+    useContext(NotesContext);
 
   const onClickAddNote = () => {
     const note = {
-      id: 1,
-      title: "Art",
+      text: "",
     };
     handleAddNote(note);
-    handleShowList();
   };
 
   const onClickDeleteNote = () => {
-    handleDeleteNote("1");
+    handleDeleteNote(1);
   };
 
   const onClickEditNote = () => {
+    const id = 2;
     const note = {
-      id: 1,
-      title: "Art",
       text: "Arnold",
-      data: "23-05-2023 4:13:00",
+      date: "23-05-2023 4:13:00",
     };
-    handleEditNote(note);
-    // handleShowList();
+    handleEditNote(id, note);
   };
 
   return (
@@ -46,7 +37,7 @@ export const Sidebar = () => {
       <button type="button" onClick={onClickEditNote}>
         Edit
       </button>
-      <ListItem/>
+      <ListItem />
     </div>
   );
 };

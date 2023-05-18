@@ -15,7 +15,7 @@ export const SearchBox = () => {
           type="text"
           placeholder="Enter note name"
           name="name"
-          onChange={handleSearch}
+          // onChange={handleSearch}
         />
       </form>
     </div>

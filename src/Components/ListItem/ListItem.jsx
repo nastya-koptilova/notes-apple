@@ -2,20 +2,16 @@ import React, { useContext } from "react";
 import { NotesContext } from "../../context/NotesContext";
 
 export const ListItem = () => {
-  const { filterNotes, handleShowNote } = useContext(NotesContext);
+  const { notes, handleShowNote } = useContext(NotesContext);
   const onClickShowNote = (event) => {
     const noteId = event.currentTarget.getAttribute("data-id");
     handleShowNote(noteId);
   };
   return (
     <ul>
-      {filterNotes.map((el) => {
-        const title = el.values.bIW6hdUSjpf4oia07dRMHy;
-        const text = el.values.ddNmkgq8jhzioSlCkmsSod;
-        const date = el.values.cVWQ5XAeDfW6pdPM4EqbTo;
+      {notes?.map(({id, text, date}) => {
         return (
-          <li key={el.id} onClick={onClickShowNote} data-id={el.id}>
-            <p>{title}</p>
+          <li key={id} onClick={onClickShowNote} data-id={id}>
             <p>{date}</p>
             <p>{text}</p>
           </li>
