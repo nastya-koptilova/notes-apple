@@ -6,20 +6,18 @@ export const Workspace = () => {
 
   const [date, setDate] = useState("");
   const [text, setText] = useState("");
-  const [noteId, setNoteId] = useState("");
 
   useEffect(() => {
     if (note) {
-      setDate(note.values.czWO_cRCjljik0xColW7uo);
-      setText(note.values.cZWQRdMCjkWPFdQ8kniCok);
-      setNoteId(note.id);
+      setDate(note.date);
+      setText(note.text);
     }
   }, [note]);
 
   return (
     <div>
-      {/* <p>{date}</p>
-      <p>{text}</p> */}
+      <p>{date}</p>
+      <p>{text}</p>
     </div>
   );
 };

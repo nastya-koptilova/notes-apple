@@ -5,6 +5,7 @@ export const ListItem = () => {
   const { notes, handleShowNote } = useContext(NotesContext);
   const onClickShowNote = (event) => {
     const noteId = event.currentTarget.getAttribute("data-id");
+    console.log(noteId);
     handleShowNote(noteId);
   };
   return (

@@ -9,6 +9,11 @@ export const Sidebar = () => {
   const onClickAddNote = () => {
     const note = {
       text: "",
+      date: `${new Date().toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })} at ${new Date().toLocaleTimeString("en-US")}`,
     };
     handleAddNote(note);
   };
@@ -21,7 +26,6 @@ export const Sidebar = () => {
     const id = 2;
     const note = {
       text: "Arnold",
-      date: "23-05-2023 4:13:00",
     };
     handleEditNote(id, note);
   };

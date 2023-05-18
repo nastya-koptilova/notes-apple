@@ -14,6 +14,7 @@ export const NotesContextProvider = ({ children }) => {
   const [note, setNote] = useState(null);
   const [noteId, setNoteId] = useState(null);
   const [searchValue, setSearchValue] = useState("");
+  const [filtredNotes, setFiltredNotes] = useState(null);
 
   const allItems = useLiveQuery(() => notesDB.toArray(), []);
 
@@ -23,19 +24,11 @@ export const NotesContextProvider = ({ children }) => {
     setNotes(allItems);
   };
 
-  // const handleShowNote = (id) => {
-  //   setNoteId(id);
-  //   const fetchNote = async () => {
-  //     try {
-  //       const noteInfo = await getOneNote(id);
-  //       const { record } = noteInfo;
-  //       setNote(record);
-  //     } catch (error) {
-  //       console.log(error.message);
-  //     }
-  //   };
-  //   fetchNote();
-  // };
+  const handleShowNote = (id) => {
+    setNoteId(id);
+    const note = notes.find((el) => Number(id) === el.id);
+    setNote(note);
+  };
 
   const handleAddNote = async (note) => {
     await notesDB.add(note);
@@ -49,6 +42,16 @@ export const NotesContextProvider = ({ children }) => {
     await notesDB.update(id, note);
   };
 
+  const handleSearchNote = (value) => {
+    notesDB
+      .where("text")
+      .startsWithIgnoreCase(value)
+      .toArray(function (notes) {
+        setFiltredNotes(notes);
+      });
+    console.log(filtredNotes);
+  };
+
   return (
     <NotesContext.Provider
       value={{
@@ -60,6 +63,8 @@ export const NotesContextProvider = ({ children }) => {
         handleDeleteNote,
         handleEditNote,
         handleShowList,
+        handleSearchNote,
+        handleShowNote,
       }}
     >
       {children}
