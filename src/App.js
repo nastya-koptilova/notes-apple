@@ -3,9 +3,10 @@ import { SearchBox } from "./Components/SearchBox/SearchBox";
 import { Sidebar } from "./Components/Sidebar/Sidebar";
 import { Workspace } from "./Components/Workspace/Workspace";
 import { NotesContext } from "./context/NotesContext";
+import { ModalDelete } from "./Components/ModalDelete/ModalDelete";
 
 function App() {
-  const { handleShowList } = useContext(NotesContext);
+  const { handleShowList, isModalOpen } = useContext(NotesContext);
 
   useEffect(() => {
     handleShowList();
@@ -16,6 +17,7 @@ function App() {
       <SearchBox />
       <Sidebar />
       <Workspace />
+      {isModalOpen && <ModalDelete />}
     </div>
   );
 }

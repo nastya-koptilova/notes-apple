@@ -15,16 +15,17 @@ export const NotesContextProvider = ({ children }) => {
   const [noteId, setNoteId] = useState(null);
   const [searchValue, setSearchValue] = useState("");
   const [filtredNotes, setFiltredNotes] = useState(null);
+  const [isDisabled, setIsDisabled] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const allItems = useLiveQuery(() => notesDB.toArray(), []);
-
-  console.log(allItems);
 
   const handleShowList = () => {
     setNotes(allItems);
   };
 
   const handleShowNote = (id) => {
+    setIsDisabled(true);
     setNoteId(Number(id));
     const note = notes.find((el) => Number(id) === el.id);
     setNote(note);
@@ -34,13 +35,23 @@ export const NotesContextProvider = ({ children }) => {
     await notesDB.add(note);
   };
 
+  const handleDeleteButton = () => {
+    setIsModalOpen(true);
+  }
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  }
+
   const handleDeleteNote = async (id) => {
     await notesDB.delete(id);
     setNote(null);
+    setIsModalOpen(false);
   };
 
-  const handleEditNote = async (id, note) => {
-    await notesDB.update(id, note);
+  const handleEditNote = async (note) => {
+    setIsDisabled(false);
+    await notesDB.update(noteId, note);
   };
 
   const handleSearchNote = (value) => {
@@ -59,6 +70,8 @@ export const NotesContextProvider = ({ children }) => {
         notes,
         note,
         noteId,
+        isDisabled,
+        isModalOpen,
         searchValue,
         handleAddNote,
         handleDeleteNote,
@@ -66,6 +79,8 @@ export const NotesContextProvider = ({ children }) => {
         handleShowList,
         handleSearchNote,
         handleShowNote,
+        handleDeleteButton,
+        handleCloseModal
       }}
     >
       {children}
