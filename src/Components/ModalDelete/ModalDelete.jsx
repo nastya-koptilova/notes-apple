@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { createPortal } from "react-dom";
 import { NotesContext } from "../../context/NotesContext";
+import s from "./ModalDelete.module.scss";
 
 const modalRoot = document.querySelector("#modal-root");
 

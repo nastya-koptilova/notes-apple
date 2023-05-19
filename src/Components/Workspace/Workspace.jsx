@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { NotesContext } from "../../context/NotesContext";
+import s from "./Workspace.module.scss";
 
 export const Workspace = () => {
   const { note, handleEditNote, isReadOnly } = useContext(NotesContext);

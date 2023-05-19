@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ListItem } from "../ListItem/ListItem";
 import { NotesContext } from "../../context/NotesContext";
+import s from "./Sidebar.module.scss";
 
 export const Sidebar = () => {
   const { handleAddNote, handleDeleteButton, handleEditDisable, noteId } =

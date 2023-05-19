@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { NotesContext } from "../../context/NotesContext";
+import s from "./ListItem.module.scss";
 
 export const ListItem = () => {
   const { notes, handleShowNote } = useContext(NotesContext);

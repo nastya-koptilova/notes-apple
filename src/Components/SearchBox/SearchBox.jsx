@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { NotesContext } from "../../context/NotesContext";
+import s from "./SearchBox.module.scss";
 
 export const SearchBox = () => {
   const { handleSearchNote } = useContext(NotesContext);
