@@ -25,7 +25,7 @@ export const NotesContextProvider = ({ children }) => {
   };
 
   const handleShowNote = (id) => {
-    setNoteId(id);
+    setNoteId(Number(id));
     const note = notes.find((el) => Number(id) === el.id);
     setNote(note);
   };
@@ -36,6 +36,7 @@ export const NotesContextProvider = ({ children }) => {
 
   const handleDeleteNote = async (id) => {
     await notesDB.delete(id);
+    setNote(null);
   };
 
   const handleEditNote = async (id, note) => {

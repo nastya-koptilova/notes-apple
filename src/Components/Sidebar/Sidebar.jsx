@@ -3,7 +3,7 @@ import { ListItem } from "../ListItem/ListItem";
 import { NotesContext } from "../../context/NotesContext";
 
 export const Sidebar = () => {
-  const { handleAddNote, handleDeleteNote, handleEditNote, handleShowList } =
+  const { handleAddNote, handleDeleteNote, handleEditNote, noteId } =
     useContext(NotesContext);
 
   const onClickAddNote = () => {
@@ -19,7 +19,7 @@ export const Sidebar = () => {
   };
 
   const onClickDeleteNote = () => {
-    handleDeleteNote(1);
+    handleDeleteNote(noteId);
   };
 
   const onClickEditNote = () => {
