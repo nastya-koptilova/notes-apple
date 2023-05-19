@@ -33,10 +33,15 @@ export const Workspace = () => {
   return (
     <>
       {date && (
-        <div>
-          <p>{date}</p>
-          <form>
-            <textarea readOnly={isReadOnly} defaultValue={text} onChange={handleEditText}></textarea>
+        <div className={s.workspace}>
+          <p className={s.workspace__date}>{date}</p>
+          <form className={s.workspace__form}>
+            <textarea
+              className={s.workspace__text}
+              readOnly={isReadOnly}
+              defaultValue={text}
+              onChange={handleEditText}
+            ></textarea>
           </form>
         </div>
       )}

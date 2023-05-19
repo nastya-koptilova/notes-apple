@@ -10,12 +10,17 @@ export const ListItem = () => {
     handleShowNote(noteId);
   };
   return (
-    <ul>
-      {notes?.map(({id, text, date}) => {
+    <ul className={s.note_list}>
+      {notes?.map(({ id, text, date }) => {
         return (
-          <li key={id} onClick={onClickShowNote} data-id={id}>
-            <p>{date}</p>
-            <p>{text}</p>
+          <li
+            className={s.note_item}
+            key={id}
+            onClick={onClickShowNote}
+            data-id={id}
+          >
+            <p className={s.note_item__date}>{date}</p>
+            <p className={s.note_item__text}>{text}</p>
           </li>
         );
       })}

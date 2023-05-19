@@ -4,6 +4,7 @@ import { Sidebar } from "./Components/Sidebar/Sidebar";
 import { Workspace } from "./Components/Workspace/Workspace";
 import { NotesContext } from "./context/NotesContext";
 import { ModalDelete } from "./Components/ModalDelete/ModalDelete";
+import s from "./App.module.scss";
 
 function App() {
   const { handleShowList, isModalOpen } = useContext(NotesContext);
@@ -13,7 +14,7 @@ function App() {
   }, [handleShowList]);
 
   return (
-    <div>
+    <div className={s.container}>
       <SearchBox />
       <Sidebar />
       <Workspace />

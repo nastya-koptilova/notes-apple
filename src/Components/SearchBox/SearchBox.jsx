@@ -10,9 +10,10 @@ export const SearchBox = () => {
   };
 
   return (
-    <div>
-      <form>
+    <div className={s.searchbox}>
+      <form className={s.searchbox__form}>
         <input
+          className={s.searchbox__input}
           type="text"
           placeholder="Enter note name"
           name="name"

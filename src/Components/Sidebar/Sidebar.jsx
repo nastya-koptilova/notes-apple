@@ -36,14 +36,14 @@ export const Sidebar = () => {
   };
 
   return (
-    <div>
-      <button type="button" onClick={onClickAddNote}>
+    <div className={s.sidebar}>
+      <button className={s.sidebar__button} type="button" onClick={onClickAddNote}>
         Add
       </button>
-      <button type="button" onClick={onClickDeleteNote} disabled={disabled}>
+      <button className={s.sidebar__button} type="button" onClick={onClickDeleteNote} disabled={disabled}>
         Delete
       </button>
-      <button type="button" onClick={onClickEditNote} disabled={disabled}>
+      <button className={s.sidebar__button} type="button" onClick={onClickEditNote} disabled={disabled}>
         Edit
       </button>
       <ListItem />
