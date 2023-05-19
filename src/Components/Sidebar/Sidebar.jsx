@@ -17,6 +17,7 @@ export const Sidebar = () => {
 
   const onClickAddNote = () => {
     const note = {
+      title: "",
       text: "",
       date: `${new Date().toLocaleDateString("en-US", {
         year: "numeric",
@@ -37,13 +38,27 @@ export const Sidebar = () => {
 
   return (
     <div className={s.sidebar}>
-      <button className={s.sidebar__button} type="button" onClick={onClickAddNote}>
+      <button
+        className={s.sidebar__button}
+        type="button"
+        onClick={onClickAddNote}
+      >
         Add
       </button>
-      <button className={s.sidebar__button} type="button" onClick={onClickDeleteNote} disabled={disabled}>
+      <button
+        className={s.sidebar__button}
+        type="button"
+        onClick={onClickDeleteNote}
+        disabled={disabled}
+      >
         Delete
       </button>
-      <button className={s.sidebar__button} type="button" onClick={onClickEditNote} disabled={disabled}>
+      <button
+        className={s.sidebar__button}
+        type="button"
+        onClick={onClickEditNote}
+        disabled={disabled}
+      >
         Edit
       </button>
       <ListItem />

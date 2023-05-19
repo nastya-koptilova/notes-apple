@@ -11,7 +11,7 @@ export const ListItem = () => {
   };
   return (
     <ul className={s.note_list}>
-      {notes?.map(({ id, text, date }) => {
+      {notes?.map(({ id, title, text, date }) => {
         return (
           <li
             className={s.note_item}
@@ -20,6 +20,7 @@ export const ListItem = () => {
             data-id={id}
           >
             <p className={s.note_item__date}>{date}</p>
+            <p className={s.note_item__title}>{title}</p>
             <p className={s.note_item__text}>{text}</p>
           </li>
         );

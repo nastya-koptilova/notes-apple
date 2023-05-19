@@ -5,7 +5,7 @@ import { useLiveQuery } from "dexie-react-hooks";
 export const NotesContext = createContext();
 
 const db = new Dexie("notesDB");
-db.version(1).stores({ notesDB: "++id,date,text" });
+db.version(1).stores({ notesDB: "++id,date,title,text" });
 
 const { notesDB } = db;
 
@@ -59,7 +59,7 @@ export const NotesContextProvider = ({ children }) => {
 
   const handleSearchNote = (value) => {
     notesDB
-      .where("text")
+      .where("title")
       .startsWithIgnoreCase(value)
       .toArray(function (notes) {
         setFiltredNotes(notes);
