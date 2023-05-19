@@ -1,10 +1,9 @@
 import { useContext, useEffect } from "react";
 import { SearchBox } from "./Components/SearchBox/SearchBox";
-import { Sidebar } from "./Components/Sidebar/Sidebar";
-import { Workspace } from "./Components/Workspace/Workspace";
 import { NotesContext } from "./context/NotesContext";
 import { ModalDelete } from "./Components/ModalDelete/ModalDelete";
 import s from "./App.module.scss";
+import { Notes } from "./Components/Notes/Notes";
 
 function App() {
   const { handleShowList, isModalOpen } = useContext(NotesContext);
@@ -16,8 +15,7 @@ function App() {
   return (
     <div className={s.container}>
       <SearchBox />
-      <Sidebar />
-      <Workspace />
+      <Notes/>
       {isModalOpen && <ModalDelete />}
     </div>
   );
