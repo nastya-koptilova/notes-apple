@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { NotesContext } from "../../context/NotesContext";
 
 export const Workspace = () => {
-  const { note, handleEditNote, isDisabled } = useContext(NotesContext);
+  const { note, handleEditNote, isReadOnly } = useContext(NotesContext);
 
   const [date, setDate] = useState(null);
   const [text, setText] = useState(null);
@@ -35,7 +35,7 @@ export const Workspace = () => {
         <div>
           <p>{date}</p>
           <form>
-            <textarea disabled={isDisabled} defaultValue={text} onChange={handleEditText}></textarea>
+            <textarea readOnly={isReadOnly} defaultValue={text} onChange={handleEditText}></textarea>
           </form>
         </div>
       )}

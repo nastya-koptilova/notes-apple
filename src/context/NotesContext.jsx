@@ -15,7 +15,7 @@ export const NotesContextProvider = ({ children }) => {
   const [noteId, setNoteId] = useState(null);
   const [searchValue, setSearchValue] = useState("");
   const [filtredNotes, setFiltredNotes] = useState(null);
-  const [isDisabled, setIsDisabled] = useState(true);
+  const [isReadOnly, setIsReadOnly] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const allItems = useLiveQuery(() => notesDB.toArray(), []);
@@ -25,7 +25,7 @@ export const NotesContextProvider = ({ children }) => {
   };
 
   const handleShowNote = (id) => {
-    setIsDisabled(true);
+    setIsReadOnly(true);
     setNoteId(Number(id));
     const note = notes.find((el) => Number(id) === el.id);
     setNote(note);
@@ -49,8 +49,11 @@ export const NotesContextProvider = ({ children }) => {
     setIsModalOpen(false);
   };
 
+  const handleEditDisable = () => {
+    setIsReadOnly(false);
+  }
+
   const handleEditNote = async (note) => {
-    setIsDisabled(false);
     await notesDB.update(noteId, note);
   };
 
@@ -70,7 +73,7 @@ export const NotesContextProvider = ({ children }) => {
         notes,
         note,
         noteId,
-        isDisabled,
+        isReadOnly,
         isModalOpen,
         searchValue,
         handleAddNote,
@@ -80,7 +83,8 @@ export const NotesContextProvider = ({ children }) => {
         handleSearchNote,
         handleShowNote,
         handleDeleteButton,
-        handleCloseModal
+        handleCloseModal,
+        handleEditDisable
       }}
     >
       {children}

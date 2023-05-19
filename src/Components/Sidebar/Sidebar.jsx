@@ -1,10 +1,18 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ListItem } from "../ListItem/ListItem";
 import { NotesContext } from "../../context/NotesContext";
 
 export const Sidebar = () => {
-  const { handleAddNote, handleEditNote, handleDeleteButton, noteId } =
+  const { handleAddNote, handleDeleteButton, handleEditDisable, noteId } =
     useContext(NotesContext);
+
+  const [disabled, setDisabled] = useState(true);
+
+  useEffect(() => {
+    if (noteId) {
+      setDisabled(false);
+    }
+  }, [noteId]);
 
   const onClickAddNote = () => {
     const note = {
@@ -19,15 +27,11 @@ export const Sidebar = () => {
   };
 
   const onClickDeleteNote = () => {
-    handleDeleteButton()
+    handleDeleteButton();
   };
 
   const onClickEditNote = () => {
-    const id = 2;
-    const note = {
-      text: "Arnold",
-    };
-    handleEditNote(id, note);
+    handleEditDisable();
   };
 
   return (
@@ -35,10 +39,10 @@ export const Sidebar = () => {
       <button type="button" onClick={onClickAddNote}>
         Add
       </button>
-      <button type="button" onClick={onClickDeleteNote}>
+      <button type="button" onClick={onClickDeleteNote} disabled={disabled}>
         Delete
       </button>
-      <button type="button" onClick={onClickEditNote}>
+      <button type="button" onClick={onClickEditNote} disabled={disabled}>
         Edit
       </button>
       <ListItem />
