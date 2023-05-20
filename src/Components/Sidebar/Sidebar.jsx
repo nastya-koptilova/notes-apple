@@ -17,7 +17,6 @@ export const Sidebar = () => {
 
   const onClickAddNote = () => {
     const note = {
-      title: "",
       text: "",
       date: `${new Date().toLocaleDateString("en-US", {
         year: "numeric",

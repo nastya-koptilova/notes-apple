@@ -1,4 +1,4 @@
 .notes__container {
-  display: flex;
-  gap: 20px;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
 }

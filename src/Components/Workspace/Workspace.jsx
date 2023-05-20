@@ -7,39 +7,21 @@ export const Workspace = () => {
 
   const [date, setDate] = useState(null);
   const [text, setText] = useState('');
-  const [title, setTitle] = useState('');
 
   useEffect(() => {
     if (note) {
       setDate(note.date);
       setText(note.text);
-      setTitle(note.title);
     } else {
       setDate(null);
       setText('');
-      setTitle('');
     }
-  }, [note, text, title]);
+  }, [note, text]);
 
   const handleEditText = (event) => {
     setText(event.target.value);
     const note = {
-      title: title,
       text: event.target.value,
-      date: `${new Date().toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      })} at ${new Date().toLocaleTimeString("en-US")}`,
-    };
-    handleEditNote(note);
-  };
-
-  const handleEditTitle = (event) => {
-    setTitle(event.target.value);
-    const note = {
-      title: event.target.value,
-      text: text,
       date: `${new Date().toLocaleDateString("en-US", {
         year: "numeric",
         month: "long",
@@ -55,12 +37,6 @@ export const Workspace = () => {
         <div className={s.workspace}>
           <p className={s.workspace__date}>{date}</p>
           <form className={s.workspace__form}>
-            <input
-              type="text"
-              defaultValue={title}
-              readOnly={isReadOnly}
-              onChange={handleEditTitle}
-            ></input>
             <textarea
               className={s.workspace__text}
               readOnly={isReadOnly}

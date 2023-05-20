@@ -59,7 +59,7 @@ export const NotesContextProvider = ({ children }) => {
 
   const handleSearchNote = (value) => {
     notesDB
-      .where("title")
+      .where("text")
       .startsWithIgnoreCase(value)
       .toArray(function (notes) {
         setFiltredNotes(notes);
