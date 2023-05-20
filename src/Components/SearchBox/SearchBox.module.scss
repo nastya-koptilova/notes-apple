@@ -1,0 +1,12 @@
+.searchbox__input {
+  height: 30px;
+  width: 300px;
+  padding: 0px 15px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+
+  &::placeholder {
+    text-align: center;
+  }
+}

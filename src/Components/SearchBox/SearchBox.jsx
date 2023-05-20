@@ -15,7 +15,7 @@ export const SearchBox = () => {
         <input
           className={s.searchbox__input}
           type="text"
-          placeholder="Enter note name"
+          placeholder="Search"
           name="name"
           onChange={handleSearch}
         />
