@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
-import { ListItem } from "../ListItem/ListItem";
 import { NotesContext } from "../../context/NotesContext";
 import s from "./Sidebar.module.scss";
+import { SearchBox } from "../SearchBox/SearchBox";
 
 export const Sidebar = () => {
   const { handleAddNote, handleDeleteButton, handleEditDisable, noteId } =
@@ -38,6 +38,7 @@ export const Sidebar = () => {
 
   return (
     <div className={s.sidebar}>
+      <div className={s.sidebar__button_container}>
       <button
         className={s.sidebar__button}
         type="button"
@@ -61,7 +62,8 @@ export const Sidebar = () => {
       >
         Edit
       </button>
-      <ListItem />
+      </div>
+      <SearchBox />
     </div>
   );
 };
