@@ -19,9 +19,11 @@ export const ListItem = () => {
             onClick={onClickShowNote}
             data-id={id}
           >
-            <p className={s.note_item__date}>{date}</p>
             <p className={s.note_item__title}>{title}</p>
-            <p className={s.note_item__text}>{text}</p>
+            <div className={s.note_item__descr}>
+              <p className={s.note_item__date}>{date}</p>
+              <p className={s.note_item__text}>{text}</p>
+            </div>
           </li>
         );
       })}
