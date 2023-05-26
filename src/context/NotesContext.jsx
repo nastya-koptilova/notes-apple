@@ -5,7 +5,7 @@ import { useLiveQuery } from "dexie-react-hooks";
 export const NotesContext = createContext();
 
 const db = new Dexie("notesDB");
-db.version(1).stores({ notesDB: "++id,date,title,text" });
+db.version(1).stores({ notesDB: "++id,date,text" });
 
 const { notesDB } = db;
 

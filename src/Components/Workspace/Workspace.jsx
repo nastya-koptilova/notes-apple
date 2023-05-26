@@ -3,20 +3,23 @@ import { NotesContext } from "../../context/NotesContext";
 import s from "./Workspace.module.scss";
 
 export const Workspace = () => {
-  const { note, handleEditNote, isReadOnly } = useContext(NotesContext);
+  const { note, handleEditNote, isReadOnly, noteId } = useContext(NotesContext);
 
   const [date, setDate] = useState(null);
-  const [text, setText] = useState('');
+  const [text, setText] = useState("");
+  const [id, setId] = useState(null);
 
   useEffect(() => {
     if (note) {
       setDate(note.date);
       setText(note.text);
+      setId(noteId);
     } else {
       setDate(null);
-      setText('');
+      setText("");
+      setId(null);
     }
-  }, [note, text]);
+  }, [note, text, noteId, id]);
 
   const handleEditText = (event) => {
     setText(event.target.value);
@@ -38,6 +41,7 @@ export const Workspace = () => {
           <p className={s.workspace__date}>{date}</p>
           <form className={s.workspace__form}>
             <textarea
+              key={text}
               className={s.workspace__text}
               readOnly={isReadOnly}
               defaultValue={text}
