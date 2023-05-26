@@ -22,7 +22,6 @@ export const Workspace = () => {
   }, [note, text, noteId, id]);
 
   const handleEditText = (event) => {
-    setText(event.target.value);
     const note = {
       text: event.target.value,
       date: `${new Date().toLocaleDateString("en-US", {
