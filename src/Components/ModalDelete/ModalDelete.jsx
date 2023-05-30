@@ -18,23 +18,25 @@ export const ModalDelete = () => {
   };
 
   return createPortal(
-    <div className={s.backdroop}>
+    <div className={s.backdrop}>
       <div className={s.modal}>
         <p className={s.modal__text}>Delete this note?</p>
-        <button
-          className={s.modal__button}
-          type="button"
-          onClick={onClickDeleteNote}
-        >
-          Yes
-        </button>
-        <button
-          className={s.modal__button}
-          type="button"
-          onClick={onClickCloseModal}
-        >
-          No
-        </button>
+        <div className={s.modal__button_container}>
+          <button
+            className={s.modal__button}
+            type="button"
+            onClick={onClickDeleteNote}
+          >
+            Yes
+          </button>
+          <button
+            className={s.modal__button}
+            type="button"
+            onClick={onClickCloseModal}
+          >
+            No
+          </button>
+        </div>
       </div>
     </div>,
     modalRoot

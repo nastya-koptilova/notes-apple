@@ -1,0 +1,38 @@
+.backdrop {
+  position: fixed;
+  overflow-y: scroll;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.modal {
+  padding: 20px 30px;
+  background-color: #fff;
+}
+
+.modal__text {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.modal__button_container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.modal__button {
+  height: 30px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: #d4d4d4;
+}
