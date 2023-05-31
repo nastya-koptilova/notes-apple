@@ -14,8 +14,11 @@ export const ListItem = () => {
       {notes?.map(({ id, text, date }) => {
         const textArray = text.split("");
         const delimeter = textArray.indexOf("\n");
+        const dateArray = date.split(" ");
+        const dateDelimeter = dateArray.indexOf("at");
         let titleArray = [];
         let noteTextArray = [];
+        let timeArray = dateArray.slice(dateDelimeter + 1, dateArray.length);
         if (delimeter > -1) {
           titleArray = textArray.slice(0, delimeter);
           noteTextArray = textArray.slice(delimeter, textArray.length);
@@ -23,12 +26,17 @@ export const ListItem = () => {
           titleArray = [...textArray];
           noteTextArray = ["Empty note"];
         }
-        if (titleArray.length > 26) {
+        if (titleArray.length > 29) {
           titleArray = [...titleArray].slice(0, 25);
           titleArray = [...titleArray, "..."];
         }
+        if (noteTextArray.length > 20) {
+          noteTextArray = [...noteTextArray].slice(0, 17);
+          noteTextArray = [...noteTextArray, "..."];
+        }
         const title = titleArray.join("");
         const noteText = noteTextArray.join("");
+        const time = timeArray.join(" ");
         return (
           <li
             className={s.note_item}
@@ -38,7 +46,7 @@ export const ListItem = () => {
           >
             <p className={s.note_item__title}>{title}</p>
             <div className={s.note_item__descr}>
-              <p className={s.note_item__date}>{date}</p>
+              <p className={s.note_item__date}>{time}</p>
               <p className={s.note_item__text}>{noteText}</p>
             </div>
           </li>
