@@ -12,6 +12,16 @@ export const ListItem = () => {
   return (
     <ul className={s.note_list}>
       {notes?.map(({ id, text, date }) => {
+        const textArray = text.split("");
+        const delimeter = textArray.indexOf("\n");
+        let titleArray = [];
+        if (delimeter > -1) {
+          titleArray = textArray.slice(0, delimeter);
+        } else {
+          titleArray = [...textArray];
+        }
+        const title = titleArray.join("");
+        console.log(title);
         return (
           <li
             className={s.note_item}
@@ -19,7 +29,7 @@ export const ListItem = () => {
             onClick={onClickShowNote}
             data-id={id}
           >
-            <p className={s.note_item__title}>{text}</p>
+            <p className={s.note_item__title}>{title}</p>
             <div className={s.note_item__descr}>
               <p className={s.note_item__date}>{date}</p>
               <p className={s.note_item__text}>{text}</p>
