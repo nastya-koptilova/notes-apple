@@ -15,16 +15,20 @@ export const ListItem = () => {
         const textArray = text.split("");
         const delimeter = textArray.indexOf("\n");
         let titleArray = [];
+        let noteTextArray = [];
         if (delimeter > -1) {
           titleArray = textArray.slice(0, delimeter);
+          noteTextArray = textArray.slice(delimeter, textArray.length);
         } else {
           titleArray = [...textArray];
+          noteTextArray = ["Empty note"];
         }
         if (titleArray.length > 26) {
           titleArray = [...titleArray].slice(0, 25);
-          titleArray = [...titleArray, '...'];
+          titleArray = [...titleArray, "..."];
         }
         const title = titleArray.join("");
+        const noteText = noteTextArray.join("");
         return (
           <li
             className={s.note_item}
@@ -35,7 +39,7 @@ export const ListItem = () => {
             <p className={s.note_item__title}>{title}</p>
             <div className={s.note_item__descr}>
               <p className={s.note_item__date}>{date}</p>
-              <p className={s.note_item__text}>{text}</p>
+              <p className={s.note_item__text}>{noteText}</p>
             </div>
           </li>
         );
