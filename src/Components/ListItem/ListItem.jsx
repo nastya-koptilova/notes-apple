@@ -20,8 +20,11 @@ export const ListItem = () => {
         } else {
           titleArray = [...textArray];
         }
+        if (titleArray.length > 26) {
+          titleArray = [...titleArray].slice(0, 25);
+          titleArray = [...titleArray, '...'];
+        }
         const title = titleArray.join("");
-        console.log(title);
         return (
           <li
             className={s.note_item}
