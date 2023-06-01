@@ -13,7 +13,6 @@ export const NotesContextProvider = ({ children }) => {
   const [notes, setNotes] = useState([]);
   const [note, setNote] = useState(null);
   const [noteId, setNoteId] = useState(null);
-  const [searchValue, setSearchValue] = useState("");
   const [filtredNotes, setFiltredNotes] = useState(null);
   const [isReadOnly, setIsReadOnly] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -37,11 +36,11 @@ export const NotesContextProvider = ({ children }) => {
 
   const handleDeleteButton = () => {
     setIsModalOpen(true);
-  }
+  };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-  }
+  };
 
   const handleDeleteNote = async (id) => {
     await notesDB.delete(id);
@@ -51,31 +50,34 @@ export const NotesContextProvider = ({ children }) => {
 
   const handleEditDisable = () => {
     setIsReadOnly(false);
-  }
+  };
 
   const handleEditNote = async (note) => {
     await notesDB.update(noteId, note);
   };
 
   const handleSearchNote = (value) => {
+    if (value === "") {
+      setFiltredNotes(null);
+      return;
+    }
     notesDB
       .where("text")
       .startsWithIgnoreCase(value)
       .toArray(function (notes) {
         setFiltredNotes(notes);
       });
-    console.log(filtredNotes);
   };
 
   return (
     <NotesContext.Provider
       value={{
         notes,
+        filtredNotes,
         note,
         noteId,
         isReadOnly,
         isModalOpen,
-        searchValue,
         handleAddNote,
         handleDeleteNote,
         handleEditNote,
@@ -84,7 +86,7 @@ export const NotesContextProvider = ({ children }) => {
         handleShowNote,
         handleDeleteButton,
         handleCloseModal,
-        handleEditDisable
+        handleEditDisable,
       }}
     >
       {children}

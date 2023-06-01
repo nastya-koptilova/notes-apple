@@ -1,12 +1,21 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { NotesContext } from "../../context/NotesContext";
 import s from "./ListItem.module.scss";
 
 export const ListItem = () => {
-  const { notes, handleShowNote } = useContext(NotesContext);
+  const { notes, filtredNotes, handleShowNote } = useContext(NotesContext);
+  const [list, setList] = useState([]);
+
+  useEffect(() => {
+    if (filtredNotes) {
+      setList(filtredNotes);
+    } else {
+      setList(notes);
+    }
+  }, [filtredNotes, notes]);
+
   const onClickShowNote = (event) => {
     const noteId = event.currentTarget.getAttribute("data-id");
-    console.log(noteId);
     handleShowNote(noteId);
   };
 
@@ -16,9 +25,12 @@ export const ListItem = () => {
     day: "numeric",
   });
 
+  console.log(filtredNotes)
+
   return (
     <ul className={s.note_list}>
-      {notes?.map(({ id, text, date, shortDate }) => {
+      {filtredNotes?.length > 0 || filtredNotes === null ? "" : <p>No notes</p>}
+      {list?.map(({ id, text, date, shortDate }) => {
         const textArray = text.split("");
         const delimeter = textArray.indexOf("\n");
         const dateArray = date.split(" ");
@@ -50,7 +62,7 @@ export const ListItem = () => {
           time = shortDate;
         }
         if (titleArray.length < 1) {
-          titleArray = ['New note']
+          titleArray = ["New note"];
         }
         const title = titleArray.join("");
         const noteText = noteTextArray.join("");
