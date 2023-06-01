@@ -34,7 +34,7 @@ export const ListItem = () => {
           noteTextArray = textArray.slice(delimeter, textArray.length);
         } else {
           titleArray = [...textArray];
-          noteTextArray = ["Empty note"];
+          noteTextArray = ["No additional text"];
         }
         if (titleArray.length > 29) {
           titleArray = [...titleArray].slice(0, 25);
@@ -48,6 +48,9 @@ export const ListItem = () => {
           time = timeArray.join(" ");
         } else if (shortDate) {
           time = shortDate;
+        }
+        if (titleArray.length < 1) {
+          titleArray = ['New note']
         }
         const title = titleArray.join("");
         const noteText = noteTextArray.join("");
