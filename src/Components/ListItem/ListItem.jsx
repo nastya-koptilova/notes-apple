@@ -8,9 +8,13 @@ export const ListItem = () => {
 
   useEffect(() => {
     if (filtredNotes) {
-      setList(filtredNotes);
-    } else {
-      setList(notes);
+      const sortedFiltredNotes = [...filtredNotes].sort(
+        (a, b) => b.update - a.update
+      );
+      setList(sortedFiltredNotes);
+    } else if (notes) {
+      const sortedNotes = [...notes].sort((a, b) => b.update - a.update);
+      setList(sortedNotes);
     }
   }, [filtredNotes, notes]);
 
@@ -24,8 +28,6 @@ export const ListItem = () => {
     month: "long",
     day: "numeric",
   });
-
-  console.log(filtredNotes)
 
   return (
     <ul className={s.note_list}>

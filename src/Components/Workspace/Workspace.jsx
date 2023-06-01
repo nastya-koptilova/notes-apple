@@ -29,6 +29,10 @@ export const Workspace = () => {
         month: "long",
         day: "numeric",
       })} at ${new Date().toLocaleTimeString("en-US")}`,
+      shortDate: `${
+        new Date().getMonth() + 1
+      }/${new Date().getDate()}/${new Date().getFullYear()}`,
+      update: `${new Date().getTime()}`,
     };
     handleEditNote(note);
   };
