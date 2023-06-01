@@ -9,9 +9,16 @@ export const ListItem = () => {
     console.log(noteId);
     handleShowNote(noteId);
   };
+
+  const todayDate = new Date().toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
   return (
     <ul className={s.note_list}>
-      {notes?.map(({ id, text, date }) => {
+      {notes?.map(({ id, text, date, shortDate }) => {
         const textArray = text.split("");
         const delimeter = textArray.indexOf("\n");
         const dateArray = date.split(" ");
@@ -19,6 +26,9 @@ export const ListItem = () => {
         let titleArray = [];
         let noteTextArray = [];
         let timeArray = dateArray.slice(dateDelimeter + 1, dateArray.length);
+        let time = "";
+        const dayArray = dateArray.slice(0, dateDelimeter);
+        const day = dayArray.join(" ");
         if (delimeter > -1) {
           titleArray = textArray.slice(0, delimeter);
           noteTextArray = textArray.slice(delimeter, textArray.length);
@@ -34,9 +44,13 @@ export const ListItem = () => {
           noteTextArray = [...noteTextArray].slice(0, 17);
           noteTextArray = [...noteTextArray, "..."];
         }
+        if (day === todayDate && shortDate === undefined) {
+          time = timeArray.join(" ");
+        } else if (shortDate) {
+          time = shortDate;
+        }
         const title = titleArray.join("");
         const noteText = noteTextArray.join("");
-        const time = timeArray.join(" ");
         return (
           <li
             className={s.note_item}

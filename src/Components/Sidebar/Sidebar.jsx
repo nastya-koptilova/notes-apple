@@ -23,6 +23,7 @@ export const Sidebar = () => {
         month: "long",
         day: "numeric",
       })} at ${new Date().toLocaleTimeString("en-US")}`,
+      shortDate: `${new Date().getMonth()+1}/${new Date().getDate()}/${new Date().getFullYear()}`,
     };
     handleAddNote(note);
   };
@@ -38,29 +39,29 @@ export const Sidebar = () => {
   return (
     <div className={s.sidebar}>
       <div className={s.sidebar__button_container}>
-      <button
-        className={s.sidebar__button}
-        type="button"
-        onClick={onClickAddNote}
-      >
-        Add
-      </button>
-      <button
-        className={s.sidebar__button}
-        type="button"
-        onClick={onClickDeleteNote}
-        disabled={disabled}
-      >
-        Delete
-      </button>
-      <button
-        className={s.sidebar__button}
-        type="button"
-        onClick={onClickEditNote}
-        disabled={disabled}
-      >
-        Edit
-      </button>
+        <button
+          className={s.sidebar__button}
+          type="button"
+          onClick={onClickAddNote}
+        >
+          Add
+        </button>
+        <button
+          className={s.sidebar__button}
+          type="button"
+          onClick={onClickDeleteNote}
+          disabled={disabled}
+        >
+          Delete
+        </button>
+        <button
+          className={s.sidebar__button}
+          type="button"
+          onClick={onClickEditNote}
+          disabled={disabled}
+        >
+          Edit
+        </button>
       </div>
       <SearchBox />
     </div>
