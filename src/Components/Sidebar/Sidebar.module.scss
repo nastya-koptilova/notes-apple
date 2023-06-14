@@ -11,10 +11,20 @@
 }
 
 .sidebar__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 30px;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
   border: none;
   border-radius: 5px;
   background-color: #fff;
+  cursor: pointer;
+}
+
+.sidebar__icon {
+  fill: #838181;
+  height: 15px;
+  width: auto;
 }

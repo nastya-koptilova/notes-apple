@@ -2,6 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import { NotesContext } from "../../context/NotesContext";
 import s from "./Sidebar.module.scss";
 import { SearchBox } from "../SearchBox/SearchBox";
+import { GrAdd } from "react-icons/gr";
+import { BsFillTrash3Fill } from "react-icons/bs";
+import { BiPlusMedical } from "react-icons/bi";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { FiEdit3 } from "react-icons/fi";
 
 export const Sidebar = () => {
   const { handleAddNote, handleDeleteButton, handleEditDisable, noteId } =
@@ -47,7 +52,7 @@ export const Sidebar = () => {
           type="button"
           onClick={onClickAddNote}
         >
-          Add
+          <BiPlusMedical className={s.sidebar__icon} />
         </button>
         <button
           className={s.sidebar__button}
@@ -55,7 +60,7 @@ export const Sidebar = () => {
           onClick={onClickDeleteNote}
           disabled={disabled}
         >
-          Delete
+          <BsFillTrash3Fill className={s.sidebar__icon} />
         </button>
         <button
           className={s.sidebar__button}
@@ -63,7 +68,7 @@ export const Sidebar = () => {
           onClick={onClickEditNote}
           disabled={disabled}
         >
-          Edit
+          <FiEdit3 className={s.sidebar__icon} />
         </button>
       </div>
       <SearchBox />

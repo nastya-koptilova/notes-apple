@@ -30,6 +30,7 @@ export const ListItem = () => {
   });
 
   return (
+    <div className={s.note_list__container}>
     <ul className={s.note_list}>
       {filtredNotes?.length > 0 || filtredNotes === null ? "" : <p>No notes</p>}
       {list?.map(({ id, text, date, shortDate }) => {
@@ -84,5 +85,6 @@ export const ListItem = () => {
         );
       })}
     </ul>
+    </div>
   );
 };
