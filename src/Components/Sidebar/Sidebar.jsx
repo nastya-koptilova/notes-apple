@@ -2,10 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { NotesContext } from "../../context/NotesContext";
 import s from "./Sidebar.module.scss";
 import { SearchBox } from "../SearchBox/SearchBox";
-import { GrAdd } from "react-icons/gr";
 import { BsFillTrash3Fill } from "react-icons/bs";
 import { BiPlusMedical } from "react-icons/bi";
-import { RiDeleteBin6Line } from "react-icons/ri";
 import { FiEdit3 } from "react-icons/fi";
 
 export const Sidebar = () => {

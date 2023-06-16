@@ -15,7 +15,7 @@ export const SearchBox = () => {
         <input
           className={s.searchbox__input}
           type="text"
-          placeholder="Search"
+          placeholder="&#x1F50E;&#xFE0E; Search"
           name="name"
           onChange={handleSearch}
         />
